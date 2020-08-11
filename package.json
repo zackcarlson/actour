@@ -1,0 +1,30 @@
+{
+  "name": "actour",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint \"client/**/*.{js,jsx}\" --quiet",
+    "format": "prettier \"client/**/*.{js, html}\" --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zackcarlson/actour.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zackcarlson/actour/issues"
+  },
+  "homepage": "https://github.com/zackcarlson/actour#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.5"
+  }
+}
