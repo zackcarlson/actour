@@ -21,5 +21,7 @@
   },
   "homepage": "https://github.com/zackcarlson/actour#readme",
   "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
