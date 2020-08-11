@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"client/**/*.{js,jsx}\" --quiet",
-    "format": "prettier \"client/**/*.{js, html}\" --write"
+    "format": "prettier \"client/**/*.{js, html}\" --write",
+    "start": "node server/index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
