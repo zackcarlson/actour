@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier \"client/**/*.{js, html}\" --write",
     "start": "cd server && npm install && npm run start",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "build": "cd client && npm install && npm run build",
+    "dev": "(cd server && npm install && npm run dev) && (cd client && npm run start)",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
