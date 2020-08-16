@@ -1,11 +1,11 @@
 const axios = require("axios");
+const gql = require("graphql-tag");
 const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLInt,
   GraphQLSchema,
-  GraphQLList,
-  graphqlSync,
+  GraphQLList
 } = require("graphql");
 
 const MovieType = new GraphQLObjectType({
@@ -15,8 +15,8 @@ const MovieType = new GraphQLObjectType({
     release_date: { type: GraphQLString },
     vote_average: { type: GraphQLInt },
     title: { type: GraphQLString },
-    poster_path: { type: GraphQLString },
-  },
+    poster_path: { type: GraphQLString }
+  }
 });
 
 const ActorType = new GraphQLObjectType({
@@ -27,9 +27,9 @@ const ActorType = new GraphQLObjectType({
     known_for_department: { type: GraphQLString },
     profile_path: { type: GraphQLString },
     known_for: {
-      type: new GraphQLList(MovieType),
-    },
-  },
+      type: new GraphQLList(MovieType)
+    }
+  }
 });
 
 const ActorDetailsType = new GraphQLObjectType({
@@ -38,36 +38,36 @@ const ActorDetailsType = new GraphQLObjectType({
     birthday: { type: GraphQLString },
     deathday: { type: GraphQLString },
     place_of_birth: { type: GraphQLString },
-    imdb_id: { type: GraphQLString },
-  },
+    imdb_id: { type: GraphQLString }
+  }
 });
 
 const ActorAwardsHighlightType = new GraphQLObjectType({
   name: "ActorAwardsHighlight",
   fields: {
-    awardName: { type: GraphQLString },
-  },
+    awardName: { type: GraphQLString }
+  }
 });
 
 const ActorAwardsSummaryType = new GraphQLObjectType({
   name: "ActorAwardsSummary",
   fields: {
     otherWinsCount: { type: GraphQLInt },
-    highlighted: { type: ActorAwardsHighlightType },
-  },
+    highlighted: { type: ActorAwardsHighlightType }
+  }
 });
 
 const ActorAwardsType = new GraphQLObjectType({
   name: "ActorAwards",
   fields: {
-    awardsSummary: { type: ActorAwardsSummaryType },
-  },
+    awardsSummary: { type: ActorAwardsSummaryType }
+  }
 });
 
 const ActorRoleType = new GraphQLObjectType({
   name: "ActorRole",
   fields: {
-    character: {type: GraphQLString}
+    character: { type: GraphQLString }
   }
 });
 
@@ -76,17 +76,17 @@ const ActorCreditType = new GraphQLObjectType({
   fields: {
     title: { type: GraphQLString },
     category: { type: GraphQLString },
-    roles: {type: new GraphQLList(ActorRoleType)},
-    year: {type: GraphQLInt},
-    status: {type: GraphQLString}
-  },
+    roles: { type: new GraphQLList(ActorRoleType) },
+    year: { type: GraphQLInt },
+    status: { type: GraphQLString }
+  }
 });
 
 const ActorCreditsType = new GraphQLObjectType({
   name: "ActorCredits",
   fields: {
-    filmography: { type: new GraphQLList(ActorCreditType) },
-  },
+    filmography: { type: new GraphQLList(ActorCreditType) }
+  }
 });
 
 const RootQuery = new GraphQLObjectType({
@@ -100,7 +100,7 @@ const RootQuery = new GraphQLObjectType({
           .get(
             `https://api.themoviedb.org/3/search/person?api_key=${process.env.TMDB_API_KEY}&language=en-US&query=${args.query}&page=1&include_adult=false`
           )
-          .then((res) => {
+          .then(res => {
             let actor = res.data.results[0];
             if (!actor) return null;
 
@@ -109,10 +109,10 @@ const RootQuery = new GraphQLObjectType({
 
             return actor.known_for_department === "Acting" ? actor : null;
           })
-          .catch((error) => {
+          .catch(error => {
             console.log(error);
           });
-      },
+      }
     },
     actorDetails: {
       type: ActorDetailsType,
@@ -122,14 +122,14 @@ const RootQuery = new GraphQLObjectType({
           .get(
             `https://api.themoviedb.org/3/person/${args.id}?api_key=${process.env.TMDB_API_KEY}&language=en-US`
           )
-          .then((res) => {
+          .then(res => {
             let actorDetail = res.data;
             return actorDetail;
           })
-          .catch((error) => {
+          .catch(error => {
             console.log(error);
           });
-      },
+      }
     },
     actorAwards: {
       type: ActorAwardsType,
@@ -141,20 +141,20 @@ const RootQuery = new GraphQLObjectType({
           headers: {
             "x-rapidapi-host": "imdb8.p.rapidapi.com",
             "x-rapidapi-key": process.env.IMDB_API_KEY,
-            useQueryString: true,
+            useQueryString: true
           },
           params: {
-            nconst: args.id,
-          },
+            nconst: args.id
+          }
         })
-          .then((response) => {
+          .then(response => {
             console.log(response.data);
             return response.data;
           })
-          .catch((error) => {
+          .catch(error => {
             console.log(error);
           });
-      },
+      }
     },
     actorCredits: {
       type: ActorCreditsType,
@@ -166,30 +166,30 @@ const RootQuery = new GraphQLObjectType({
           headers: {
             "x-rapidapi-host": "imdb8.p.rapidapi.com",
             "x-rapidapi-key": process.env.IMDB_API_KEY,
-            useQueryString: true,
+            useQueryString: true
           },
           params: {
-            nconst: args.id,
-          },
+            nconst: args.id
+          }
         })
-          .then((response) => {
+          .then(response => {
             return response.data;
           })
-          .then((credits) => {
-            credits.filmography = credits.filmography.filter((credit) => {
+          .then(credits => {
+            credits.filmography = credits.filmography.filter(credit => {
               return credit.category === "actor" ? credit : null;
             });
 
             return credits;
           })
-          .catch((error) => {
+          .catch(error => {
             console.log(error);
           });
-      },
-    },
-  },
+      }
+    }
+  }
 });
 
 module.exports = new GraphQLSchema({
-  query: RootQuery,
+  query: RootQuery
 });

@@ -7,7 +7,7 @@ import Landing from "./pages/landing";
 import "./App.css";
 
 const httpLink = new HttpLink({
-  uri: "https://actour.herokuapp.com/graphql",
+  uri: "/graphql",
 });
 
 const client = new ApolloClient({
