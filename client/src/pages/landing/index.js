@@ -1,14 +1,24 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router";
 import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
 import "./index.css";
 
 const Landing = (props) => {
+  const [isError, setError] = useState(false);
   const [query, setQuery] = useState("");
-  const [payload, setPayload] = useState(null);
+  const isValidActor = isError && `Please enter a valid actor`;
 
   const handleChange = (e) => {
-    setQuery(e.target.value);
+    const targetValue = e.target.value;
+    handleValidation(targetValue);
+    setQuery(targetValue);
+  };
+
+  const handleValidation = (inputValue) => {
+    if (!inputValue && isError) {
+      setError(false);
+    }
   };
 
   const handleSearch = async (e) => {
@@ -27,8 +37,12 @@ const Landing = (props) => {
         variables: { query: query },
       });
 
-      setPayload(data.actor);
+      data.actor ? handleRedirect() : setError(true);
     }
+  };
+
+  const handleRedirect = () => {
+    props.history.push(`/actor/${query}`);
   };
 
   return (
@@ -47,11 +61,9 @@ const Landing = (props) => {
           onKeyDown={handleSearch}
         />
       </div>
-      <div className="Landing--error">
-        {payload && `This is the result: ${JSON.stringify(payload)}`}
-      </div>
+      <div className="Landing--error">{isValidActor}</div>
     </div>
   );
 };
 
-export default withApollo(Landing);
+export default withRouter(withApollo(Landing));
