@@ -13,16 +13,17 @@ const Landing = (props) => {
   const handleSearch = async (e) => {
     if (e.key === "Enter") {
       const { client } = props;
-
+      const GET_ACTOR = gql`
+        query Acting($query: String!) {
+          actor(query: $query) {
+            name
+            known_for_department
+          }
+        }
+      `;
       const res = await client.query({
-        query: gql`
-            query Acting {
-              actor(query: ${actor}) {
-                name
-                known_for_department
-              }
-            }
-          `,
+        query: GET_ACTOR,
+        variables: { query: actor },
       });
 
       console.log(res);
