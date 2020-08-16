@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "(prettier \"client/**/*.{js, html}\" --write) && (prettier \"server/**/*.js\" --write)",
-    "start": "cd server && npm install && npm run start",
+    "server": "cd server && npm install && npm run start",
+    "start": "npm install && npm run server",
     "build": "cd client && npm install && npm run build",
     "dev-serve": "cd server && npm install && npm run dev",
     "dev-start": "cd client && npm run start",

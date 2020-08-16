@@ -1,5 +1,4 @@
 const axios = require("axios");
-const gql = require("graphql-tag");
 const {
   GraphQLObjectType,
   GraphQLString,
