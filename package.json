@@ -25,7 +25,6 @@
   "homepage": "https://github.com/zackcarlson/actour#readme",
   "devDependencies": {},
   "dependencies": {
-    "dotenv": "^8.2.0",
     "prettier": "^2.0.5"
   }
 }

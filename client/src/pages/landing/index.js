@@ -4,10 +4,11 @@ import gql from "graphql-tag";
 import "./index.css";
 
 const Landing = (props) => {
-  const [actor, setActor] = useState("");
+  const [query, setQuery] = useState("");
+  const [payload, setPayload] = useState(null);
 
   const handleChange = (e) => {
-    setActor(e.target.value);
+    setQuery(e.target.value);
   };
 
   const handleSearch = async (e) => {
@@ -21,12 +22,12 @@ const Landing = (props) => {
           }
         }
       `;
-      const res = await client.query({
+      const { data } = await client.query({
         query: GET_ACTOR,
-        variables: { query: actor },
+        variables: { query: query },
       });
 
-      console.log(res);
+      setPayload(data.actor);
     }
   };
 
@@ -46,7 +47,9 @@ const Landing = (props) => {
           onKeyDown={handleSearch}
         />
       </div>
-      <div className="Landing--error"></div>
+      <div className="Landing--error">
+        {payload && `This is the result: ${JSON.stringify(payload)}`}
+      </div>
     </div>
   );
 };
