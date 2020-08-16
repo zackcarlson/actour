@@ -14,6 +14,7 @@ app.use(
   graphqlHTTP({
     schema,
     graphiql: true,
+    introspection: true
   })
 );
 
