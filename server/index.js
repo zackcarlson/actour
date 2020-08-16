@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { graphqlHTTP } = require("express-graphql");
-const { schema } = require("./schema");
+const schema = require("./schema");
 
 const app = express();
 app.use(cors());
