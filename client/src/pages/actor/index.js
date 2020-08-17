@@ -73,8 +73,18 @@ const Actor = (props) => {
         <div className="Actor--name">{actorInfo && actorInfo.stats.name}</div>
 
         <div className="Actor--highlights">
-          <div className="Actor--movie-count"></div>
-          <div className="Actor--award-count"></div>
+          <div className="Actor--credits-count">
+            <div className="Actor--credits-number">
+              {actorInfo && actorInfo.credits.length}
+            </div>
+            <div className="Actor--credits-label">Credits</div>
+          </div>
+          <div className="Actor--awards-count">
+            <div className="Actor--awards-number">
+              {actorInfo && actorInfo.awards.otherWinsCount}
+            </div>
+            <div className="Actor--awards-label">Awards</div>
+          </div>
         </div>
       </div>
 
@@ -95,6 +105,22 @@ const Actor = (props) => {
 
       <div className="Actor--credits">
         {/* Map through a list of Credit components */}
+        {actorInfo &&
+          actorInfo.credits.map(({title, roles, year, status}, i) => {
+            return (
+              <div
+                className="Actor--credit"
+                key={`${i} ${title}`}
+              >
+                <div className="Actor--credit-year">{year ? year : status}</div>
+                <div className="Actor--credit-title">{title}</div>
+                <div className="Actor--credit-roles">
+                  {roles && (roles.map(({character}, i) => character)).join(" / ")}
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
     </div>
   );
