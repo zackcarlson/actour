@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { withApollo } from "react-apollo";
-import gql from "graphql-tag";
+import { GET_ACTOR } from "../../queries";
 import "./index.css";
 
 const Landing = (props) => {
@@ -24,14 +24,6 @@ const Landing = (props) => {
   const handleSearch = async (e) => {
     if (e.key === "Enter") {
       const { client } = props;
-      const GET_ACTOR = gql`
-        query Acting($query: String!) {
-          actor(query: $query) {
-            name
-            known_for_department
-          }
-        }
-      `;
       const { data } = await client.query({
         query: GET_ACTOR,
         variables: { query: query },
