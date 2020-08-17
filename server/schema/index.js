@@ -152,7 +152,6 @@ const RootQuery = new GraphQLObjectType({
           },
         })
           .then((response) => {
-            console.log(response.data);
             return response.data;
           })
           .catch((error) => {
@@ -177,14 +176,11 @@ const RootQuery = new GraphQLObjectType({
           },
         })
           .then((response) => {
-            return response.data;
-          })
-          .then((credits) => {
-            credits.filmography = credits.filmography.filter((credit) => {
-              return credit.category === "actor" ? credit : null;
+            const credits = response.data.filmography.filter((credit) => {
+              return (credit.category === "actor" || credit.category === "actress" )? credit : null;
             });
-
-            return credits;
+            response.data.filmography = credits;
+            return response.data;
           })
           .catch((error) => {
             console.log(error);
