@@ -1,6 +1,8 @@
 const actorTypes = `
   type Query {
     getActor(query: String!): Actor
+    getCredits(id: String!): [Credit]
+    getAwards(id: String!): Awards
   }
 
   type Awards {
@@ -33,8 +35,6 @@ const actorTypes = `
     profile_path: String
     known_for: [Movie]
     imdb_id: String
-    credits: [Credit]
-    awards: Awards
   }
 `;
 

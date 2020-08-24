@@ -8,7 +8,7 @@ const Stats = ({ actorInfo, name }) => {
     <div className="Actor--stats">
       <Avatar actorInfo={actorInfo} name={name} />
       <div className="Actor--name">{actorInfo && actorInfo.name}</div>
-      <Highlights actorInfo={actorInfo} />
+      <Highlights />
     </div>
   );
 };

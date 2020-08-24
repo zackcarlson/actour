@@ -12,19 +12,29 @@ export const GET_ACTOR = gql`
         title
       }
       imdb_id
-      credits {
-        title
-        year
-        status
-        category
-        roles {
-          character
-        }
+    }
+  }
+`;
+
+export const GET_CREDITS = gql`
+  query Credits($id: String!) {
+    getCredits(id: $id) {
+      title
+      roles {
+        character
       }
-      awards {
-        otherWinsCount
-        awardName
-      }
+      year
+      status
+      category
+    }
+  }
+`;
+
+export const GET_AWARDS = gql`
+  query Awards($id: String!) {
+    getAwards(id: $id) {
+      otherWinsCount
+      awardName
     }
   }
 `;

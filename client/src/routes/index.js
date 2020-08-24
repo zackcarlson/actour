@@ -7,7 +7,7 @@ const Routes = (props) => {
   return (
     <Switch>
       <Route exact path="/" component={Landing} />
-      <Route path="/actor/:name" component={Actor} />
+      <Route path="/actor/:name/:imdb" component={Actor} />
     </Switch>
   );
 };

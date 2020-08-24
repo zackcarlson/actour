@@ -1,8 +1,8 @@
 const {
   getActor,
   addActorIMDBID,
-  addActorCredits,
-  addActorAwards,
+  getActorCredits,
+  getActorAwards,
 } = require("../utils");
 
 const actorResolvers = {
@@ -12,16 +12,15 @@ const actorResolvers = {
       if (!actor) return actor;
 
       actor = await addActorIMDBID(actor);
-
-      const [a, b] = await Promise.all([
-        addActorCredits(actor),
-        addActorAwards(actor),
-      ]);
-
-      actor = a;
-      actor = b;
-
       return actor;
+    },
+    getCredits: async (_, { id }, __, info) => {
+      let credits = await getActorCredits(id);
+      return credits;
+    },
+    getAwards: async (_, { id }, __, info) => {
+      let awards = getActorAwards(id);
+      return awards;
     },
   },
 };

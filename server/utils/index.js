@@ -29,7 +29,7 @@ const addActorIMDBID = async (actor) => {
   return actor;
 };
 
-const addActorCredits = async (actor) => {
+const getActorCredits = async (id) => {
   const result = await axios({
     method: "GET",
     url: "https://imdb8.p.rapidapi.com/actors/get-all-filmography",
@@ -39,7 +39,7 @@ const addActorCredits = async (actor) => {
       useQueryString: true,
     },
     params: {
-      nconst: actor.imdb_id,
+      nconst: id,
     },
   });
 
@@ -49,11 +49,11 @@ const addActorCredits = async (actor) => {
       : null;
   });
 
-  actor.credits = credits;
-  return actor;
+  // actor.credits = credits;
+  return credits;
 };
 
-const addActorAwards = async (actor) => {
+const getActorAwards = async (id) => {
   const result = await axios({
     method: "GET",
     url: "https://imdb8.p.rapidapi.com/actors/get-awards-summary",
@@ -63,26 +63,26 @@ const addActorAwards = async (actor) => {
       useQueryString: true,
     },
     params: {
-      nconst: actor.imdb_id,
+      nconst: id,
     },
   });
 
-  actor.awards = { otherWinsCount: 0, awardName: "" };
-  let awards = result.data.awardsSummary;
+  let awards = { otherWinsCount: 0, awardName: "" };
+  let awardsSummary = result.data.awardsSummary;
 
-  if (awards.hasOwnProperty("otherWinsCount")) {
-    actor.awards.otherWinsCount = awards.otherWinsCount;
+  if (awardsSummary.hasOwnProperty("otherWinsCount")) {
+    awards.otherWinsCount = awardsSummary.otherWinsCount;
   }
-  if (awards.hasOwnProperty("highlighted")) {
-    actor.awards.awardName = awards.highlighted.awardName;
+  if (awardsSummary.hasOwnProperty("highlighted")) {
+    awards.awardName = awardsSummary.highlighted.awardName;
   }
 
-  return actor;
+  return awards;
 };
 
 module.exports = {
   getActor,
   addActorIMDBID,
-  addActorCredits,
-  addActorAwards,
+  getActorCredits,
+  getActorAwards,
 };

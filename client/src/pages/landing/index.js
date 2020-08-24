@@ -26,7 +26,8 @@ const Landing = (props) => {
       const { client } = props;
 
       if (window.localStorage.getItem(query)) {
-        return handleRedirect();
+        const { imdb_id } = JSON.parse(window.localStorage.getItem(query));
+        return handleRedirect(imdb_id);
       }
 
       const { data } = await client.query({
@@ -36,15 +37,15 @@ const Landing = (props) => {
 
       if (data.getActor) {
         window.localStorage.setItem(query, JSON.stringify(data.getActor));
-        return handleRedirect();
+        return handleRedirect(data.getActor.imdb_id);
       }
 
       setError(true);
     }
   };
 
-  const handleRedirect = () => {
-    props.history.push(`/actor/${query}`);
+  const handleRedirect = (imdbId) => {
+    props.history.push(`/actor/${query}/${imdbId}`);
   };
 
   return (
