@@ -6,7 +6,7 @@ const Works = ({ actorInfo }) => {
   return (
     <div className="Actor--notable-work">
       {actorInfo &&
-        actorInfo.stats.known_for.map(({ poster_path, title }, i) => {
+        actorInfo.known_for.map(({ poster_path, title }, i) => {
           return (
             <Work
               poster_path={poster_path}

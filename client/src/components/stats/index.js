@@ -7,7 +7,7 @@ const Stats = ({ actorInfo, name }) => {
   return (
     <div className="Actor--stats">
       <Avatar actorInfo={actorInfo} name={name} />
-      <div className="Actor--name">{actorInfo && actorInfo.stats.name}</div>
+      <div className="Actor--name">{actorInfo && actorInfo.name}</div>
       <Highlights actorInfo={actorInfo} />
     </div>
   );

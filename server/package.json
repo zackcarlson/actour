@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/zackcarlson/actour#readme",
   "dependencies": {
+    "apollo-server": "^2.16.1",
+    "apollo-server-express": "^2.16.1",
     "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -27,6 +29,7 @@
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
     "graphql": "^15.3.0",
+    "graphql-tools": "^6.0.18",
     "node": "^14.7.0",
     "path": "^0.12.7"
   },

@@ -24,12 +24,22 @@ const Landing = (props) => {
   const handleSearch = async (e) => {
     if (e.key === "Enter") {
       const { client } = props;
+
+      if (window.localStorage.getItem(query)) {
+        return handleRedirect();
+      }
+
       const { data } = await client.query({
         query: GET_ACTOR,
         variables: { query: query },
       });
 
-      data.actor ? handleRedirect() : setError(true);
+      if (data.getActor) {
+        window.localStorage.setItem(query, JSON.stringify(data.getActor));
+        return handleRedirect();
+      }
+
+      setError(true);
     }
   };
 
