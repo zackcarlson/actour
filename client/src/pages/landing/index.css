@@ -1,0 +1,73 @@
+.Landing--container {
+  min-height: 100vh;
+  padding-top: 9em;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #9a35ef, #4b00c4, #4176d6);
+}
+
+.Landing--logo {
+  padding-bottom: 2em;
+}
+
+.Landing--icon {
+  width: 127px;
+  height: 127px;
+}
+
+.Landing--directions {
+  margin-bottom: 2em;
+}
+
+.Landing--directions label {
+  font-family: "Work Sans", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5em;
+  line-height: 38px;
+  color: white;
+}
+
+.Landing--input input {
+  background: #000000;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  padding: 1em;
+  width: 25em;
+  font-size: 1.2em;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  color: #c1b4e8;
+  font-weight: 500;
+}
+
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+@media screen and (max-width: 400px) {
+  .Landing--input,
+  .Landing--input input {
+    width: 100%;
+  }
+  .Landing--container {
+    padding: 9em 1em 1em 1em;
+  }
+}

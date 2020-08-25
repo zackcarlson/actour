@@ -1,11 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { withRouter, useParams } from "react-router";
 import { withApollo } from "react-apollo";
 import { GET_ACTOR } from "../../queries";
-import Credits from "../../components/credits";
-import Works from "../../components/works";
-import Stats from "../../components/stats";
+import { handleCache } from "../../utils";
 import "./index.css";
+const Credits = lazy(() =>
+  import(
+    /* webpackPreload: true */
+    "../../components/credits"
+  )
+);
+const Works = lazy(() =>
+  import(
+    /* webpackPreload: true */
+    "../../components/works"
+  )
+);
+const Stats = lazy(() =>
+  import(
+    /* webpackPreload: true */
+    "../../components/stats"
+  )
+);
 
 const Actor = (props) => {
   const { name } = useParams();
@@ -13,41 +29,32 @@ const Actor = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handleGetActor = async () => {
-      const storage = window.localStorage;
-      const { client } = props;
-
-      if (storage.getItem(name)) {
-        const actor = JSON.parse(window.localStorage.getItem(name));
-        setActorInfo(actor);
-        setIsLoading(false);
-      } else {
-        const { data } = await client.query({
-          query: GET_ACTOR,
-          variables: { query: name },
-        });
-
-        storage.setItem(name, JSON.stringify(data.getActor));
-        setActorInfo(data.getActor);
-        setIsLoading(false);
-      }
-    };
-
-    handleGetActor();
+    const { client } = props;
+    handleCache(
+      client,
+      name,
+      setActorInfo,
+      setIsLoading,
+      GET_ACTOR,
+      { query: name },
+      "getActor"
+    );
   }, [name, props]);
 
   return (
-    <div className="Actor--container">
-      {isLoading && !actorInfo ? (
-        "Loading..."
-      ) : (
-        <>
-          <Stats actorInfo={actorInfo} />
-          <Works actorInfo={actorInfo} />
-        </>
-      )}
-      <Credits />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="Actor--container">
+        {isLoading && !actorInfo ? (
+          "Loading..."
+        ) : (
+          <>
+            <Stats actorInfo={actorInfo} />
+            <Works actorInfo={actorInfo} />
+          </>
+        )}
+        <Credits />
+      </div>
+    </Suspense>
   );
 };
 

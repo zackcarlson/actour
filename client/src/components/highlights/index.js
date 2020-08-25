@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { withApollo } from "react-apollo";
 import { GET_AWARDS } from "../../queries";
+import { handleCache } from "../../utils";
 import "./index.css";
 
 const Highlights = (props) => {
@@ -10,30 +11,16 @@ const Highlights = (props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const handleGetAwards = async () => {
-      const storage = window.localStorage;
-      const { client } = props;
-      const searchTerm = `${name}-${imdb}-awards`;
-
-      if (storage.getItem(searchTerm)) {
-        const awardHighlights = JSON.parse(
-          window.localStorage.getItem(searchTerm)
-        );
-        setAwards(awardHighlights);
-        setIsLoading(false);
-      } else {
-        const { data } = await client.query({
-          query: GET_AWARDS,
-          variables: { id: imdb },
-        });
-
-        storage.setItem(searchTerm, JSON.stringify(data.getAwards));
-        setAwards(data.getAwards);
-        setIsLoading(false);
-      }
-    };
-
-    handleGetAwards();
+    const { client } = props;
+    handleCache(
+      client,
+      `${name}-${imdb}-awards`,
+      setAwards,
+      setIsLoading,
+      GET_AWARDS,
+      { id: imdb },
+      "getAwards"
+    );
   }, [name, props, imdb]);
 
   return (

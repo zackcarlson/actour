@@ -1,15 +1,27 @@
-import React from "react";
-import Avatar from "../avatar";
-import Highlights from "../highlights";
+import React, { lazy, Suspense } from "react";
 import "./index.css";
+const Avatar = lazy(() =>
+  import(
+    /* webpackPreload: true */
+    "../avatar"
+  )
+);
+const Highlights = lazy(() =>
+  import(
+    /* webpackPreload: true */
+    "../highlights"
+  )
+);
 
 const Stats = ({ actorInfo, name }) => {
   return (
-    <div className="Actor--stats">
-      <Avatar actorInfo={actorInfo} name={name} />
-      <div className="Actor--name">{actorInfo && actorInfo.name}</div>
-      <Highlights />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="Actor--stats">
+        <Avatar actorInfo={actorInfo} name={name} />
+        <div className="Actor--name">{actorInfo && actorInfo.name}</div>
+        <Highlights />
+      </div>
+    </Suspense>
   );
 };
 

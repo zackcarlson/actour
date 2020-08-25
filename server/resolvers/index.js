@@ -19,7 +19,7 @@ const actorResolvers = {
       return credits;
     },
     getAwards: async (_, { id }, __, info) => {
-      let awards = getActorAwards(id);
+      let awards = await getActorAwards(id);
       return awards;
     },
   },

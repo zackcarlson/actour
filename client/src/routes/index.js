@@ -1,14 +1,26 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
-import Landing from "../pages/landing";
-import Actor from "../pages/actor";
+const Landing = lazy(() =>
+  import(
+    /* webpackPrefetch: true */
+    "../pages/landing"
+  )
+);
+const Actor = lazy(() =>
+  import(
+    /* webpackPrefetch: true */
+    "../pages/actor"
+  )
+);
 
 const Routes = (props) => {
   return (
-    <Switch>
-      <Route exact path="/" component={Landing} />
-      <Route path="/actor/:name/:imdb" component={Actor} />
-    </Switch>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/actor/:name/:imdb" component={Actor} />
+      </Switch>
+    </Suspense>
   );
 };
 
