@@ -50,7 +50,7 @@ const Landing = (props) => {
 
   return (
     <div className="Landing--container">
-      <form className="Landing--form">
+      <div className="Landing--form">
         <div className="Landing--logo">
           <svg
             width="127"
@@ -83,17 +83,17 @@ const Landing = (props) => {
           Find An Actor
         </label>
         <input
-          type="search"
+          type="text"
           id="site-search"
+          autoComplete="off"
           className="Landing--input"
-          name="q"
           aria-label="Search through site content"
           onChange={handleChange}
           onKeyDown={handleSearch}
           placeholder="Robert De Niro"
         />
         <div className="Landing--error">{isValidActor}</div>
-      </form>
+      </div>
     </div>
   );
 };

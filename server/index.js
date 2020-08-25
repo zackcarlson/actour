@@ -9,11 +9,15 @@ const app = express();
 const apolloServer = new ApolloServer({
   schema: actorSchema,
 });
+const corsOptions = {
+  origin: "https://actour.herokuapp.com",
+};
 
 apolloServer.applyMiddleware({ app, path: "/graphql" });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+
+app.use(cors(corsOptions));
 
 app.use(express.static(path.join(__dirname, "../client/build")));
 

@@ -33,7 +33,9 @@
 
 .Landing--input {
   background: #000000;
-  border-radius: 0.25rem !important;
+  border-radius: 0.25em !important;
+  -webkit-border-radius: 0.25em !important;
+  -moz-border-radius: 0.25em !important;
   outline: none;
   border: 0px none;
   padding: 1.5rem;
@@ -46,27 +48,3 @@
   font-weight: 500;
   margin: 0px auto;
 }
-
-input[type="search"]::-ms-clear {
-  display: none;
-  width: 0;
-  height: 0;
-}
-input[type="search"]::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration {
-  display: none;
-}
-
-/* @media screen and (max-width: 400px) {
-  .Landing--input {
-    width: 100%;
-  }
-} */
