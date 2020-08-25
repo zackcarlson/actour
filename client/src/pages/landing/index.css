@@ -38,9 +38,8 @@
   -moz-border-radius: 0.25em !important;
   outline: none;
   border: 0px none;
-  padding: 1.5rem;
+  padding: 1.5em;
   max-width: 500px;
-  width: 100%;
   font-size: 1.2em;
   text-align: center;
   font-family: "Raleway", sans-serif;
