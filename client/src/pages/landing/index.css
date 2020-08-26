@@ -4,15 +4,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #9a35ef, #4b00c4, #4176d6);
+  /* background: linear-gradient(to bottom, #9a35ef, #4b00c4, #4176d6); */
+  background: #090121e6;
 }
 
 .Landing--form {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
-  max-width: 600px;
   margin-bottom: 20vh;
+  min-width: 400px;
 }
 
 .Landing--logo {
@@ -23,7 +25,7 @@
 .Landing--label {
   font-family: "Open Sans", sans-serif;
   font-weight: 400 !important;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 500;
   margin: 1rem 0;
   color: white;
@@ -31,25 +33,42 @@
 }
 
 .Landing--input {
-  background: #000000;
+  /* background: #000000; */
+  background: rgb(193, 180, 232);
   border-radius: 0.25em !important;
   -webkit-border-radius: 0.25em !important;
   -moz-border-radius: 0.25em !important;
   outline: none;
   border: 0px none;
-  padding: 1.5em;
-  max-width: 500px;
+  padding: 1.2em;
+  min-width: 400px;
   font-size: 1.2em;
   text-align: center;
   font-family: "Raleway", sans-serif;
-  color: #c1b4e8;
+  /* color: #c1b4e8; */
+  color: #492d9a;
   font-weight: 500;
-  margin: 0px auto;
 }
 
-@media only screen and (min-width: 600px) {
+.Landing--input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #492d9a;
+  opacity: 1; /* Firefox */
+}
+
+.Landing--input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #492d9a;
+}
+
+.Landing--input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #492d9a;
+}
+
+@media only screen and (max-width: 500px) {
   .Landing--form,
   .Landing--input {
-    width: 100%;
+    min-width: auto;
   }
 }

@@ -144,7 +144,7 @@ const Landing = (props) => {
           </svg>
         </div>
         <label className="Landing--label" htmlFor="site-search">
-          Find An Actor
+          Find an actor
         </label>
         <input
           type="text"
