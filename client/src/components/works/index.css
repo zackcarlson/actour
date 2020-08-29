@@ -1,0 +1,27 @@
+.Actor--worksContainer {
+  width: 100%;
+}
+
+.Actor--worksContainer h2 {
+  color: #dcd1ff;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500 !important;
+}
+
+.Actor--notable-works {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  background: #3a2a5491;
+  padding: 1em 0;
+  -webkit-box-shadow: inset 0px 2px 5px -1px rgba(0, 0, 0, 1),
+    inset 0px -2px 5px -1px rgba(0, 0, 0, 1);
+  -moz-box-shadow: inset 0px 2px 5px -1px rgba(0, 0, 0, 1),
+    inset 0px -2px 5px -1px rgba(0, 0, 0, 1);
+  box-shadow: inset 0px 2px 5px -1px rgba(0, 0, 0, 1),
+    inset 0px -2px 5px -1px rgba(0, 0, 0, 1);
+}
