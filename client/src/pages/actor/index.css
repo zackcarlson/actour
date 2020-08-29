@@ -7,13 +7,3 @@
   justify-items: center;
   align-items: center;
 }
-
-.Actor--image img {
-  width: 200px;
-  height: auto;
-}
-
-.Actor--notable-credit img {
-  width: 100px;
-  height: auto;
-}
