@@ -16,7 +16,8 @@
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
-  background: #3a2a5491;
+  /* background: #3a2a5491; */
+  background: #283156;
   padding: 1em 0;
   -webkit-box-shadow: inset 0px 2px 5px -1px rgba(0, 0, 0, 1),
     inset 0px -2px 5px -1px rgba(0, 0, 0, 1);
