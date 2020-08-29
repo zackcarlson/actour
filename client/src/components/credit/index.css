@@ -1,0 +1,53 @@
+.Actor--credit {
+  max-width: 700px;
+  margin: 0 auto;
+  max-height: 100px;
+  background: #223594;
+  border-radius: 0px;
+  color: #c7c7c7;
+  padding: 2em 1em;
+  text-align: center;
+}
+
+.Actor--credit {
+  background: #2a3d7bfc;
+  border-bottom: 1px solid #4c599e;
+}
+
+.Actor--credit:hover {
+  background: #314191;
+}
+
+.Actor--credit-year {
+  font-family: "Open Sans", sans-serif;
+  color: #a9a9a9;
+  font-size: 1em;
+  font-weight: 300;
+  margin-bottom: 0.25em;
+}
+.Actor--credit-title {
+  color: white;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  font-family: "Raleway", sans-serif;
+}
+.Actor--credit-roles {
+  color: #b09bf0;
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300 !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .Actor--credit-title {
+    font-size: 1.1em;
+  }
+  .Actor--credit-roles {
+    font-size: 0.9em;
+  }
+}

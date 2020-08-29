@@ -31,21 +31,24 @@ const Credits = (props) => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="Actor--credits">
-        {isLoading && !credits
-          ? "Loading..."
-          : credits.map(({ title, roles, year, status }, i) => {
-              return (
-                <Credit
-                  title={title}
-                  roles={roles}
-                  year={year}
-                  status={status}
-                  i={i}
-                  key={title + i}
-                />
-              );
-            })}
+      <div className="Actor--creditsContainer">
+        <h2>Credits</h2>
+        <div className="Actor--credits">
+          {isLoading && !credits
+            ? "Loading..."
+            : credits.map(({ title, roles, year, status }, i) => {
+                return (
+                  <Credit
+                    title={title}
+                    roles={roles}
+                    year={year}
+                    status={status}
+                    i={i}
+                    key={title + i}
+                  />
+                );
+              })}
+        </div>
       </div>
     </Suspense>
   );

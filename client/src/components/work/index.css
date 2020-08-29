@@ -1,4 +1,4 @@
 .Actor--notable-credit img {
-  width: 300px;
+  max-width: 250px;
   height: auto;
 }
