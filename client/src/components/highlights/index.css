@@ -1,0 +1,25 @@
+.Actor--highlights {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 1.5em;
+}
+
+.Actor--awards-count,
+.Actor--awards-highlight {
+  text-align: center;
+}
+
+.Actor--awards-name,
+.Actor--awards-number {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300 !important;
+  color: #c1b4e8;
+}
+
+.Actor--awards-label {
+  text-transform: uppercase;
+  color: #c5c5c5;
+  font-family: "Raleway", sans-serif;
+}
