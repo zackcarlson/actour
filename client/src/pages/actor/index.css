@@ -1,6 +1,7 @@
 .Actor--container {
   /* background: linear-gradient(-95deg, #9a35ef, #4b00c4, #050f20); */
-  background: #090121e6;
+  /* background: #090121e6; */
+  background: #11152d;
   display: flex;
   flex-direction: column;
   justify-items: center;
