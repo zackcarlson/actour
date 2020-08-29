@@ -1,0 +1,9 @@
+.Actor--name {
+  color: white;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600 !important;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 1rem 0;
+}

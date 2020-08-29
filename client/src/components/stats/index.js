@@ -13,11 +13,11 @@ const Highlights = lazy(() =>
   )
 );
 
-const Stats = ({ actorInfo, name }) => {
+const Stats = ({ actorInfo }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="Actor--stats">
-        <Avatar actorInfo={actorInfo} name={name} />
+        <Avatar actorInfo={actorInfo} />
         <div className="Actor--name">{actorInfo && actorInfo.name}</div>
         <Highlights />
       </div>
