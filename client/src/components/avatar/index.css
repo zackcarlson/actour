@@ -1,0 +1,10 @@
+.Actor--image {
+  margin-top: 2rem;
+}
+
+.Actor--image img {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  border: 4px solid #b09bf0;
+}
