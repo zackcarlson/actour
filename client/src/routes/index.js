@@ -1,28 +1,18 @@
-import React, { lazy, Suspense } from "react";
-// import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { Route, Switch } from "react-router-dom";
-const Landing = lazy(() =>
-  import(
-    /* webpackPrefetch: true */
-    "../pages/landing"
-  )
-);
-const Actor = lazy(() =>
-  import(
-    /* webpackPrefetch: true */
-    "../pages/actor"
-  )
-);
+import React from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Route, Switch, withRouter } from "react-router-dom";
+import Landing from "../pages/landing";
+import Actor from "../pages/actor";
 
-const Routes = (props) => {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Switch>
+const Routes = withRouter(({ location }) => (
+  <TransitionGroup>
+    <CSSTransition key={location.key} classNames="slide" timeout={1000}>
+      <Switch location={location}>
         <Route exact path="/" component={Landing} />
         <Route path="/actor/:name/:imdb" component={Actor} />
       </Switch>
-    </Suspense>
-  );
-};
+    </CSSTransition>
+  </TransitionGroup>
+));
 
 export default Routes;

@@ -1,13 +1,10 @@
 import React from "react";
 import "./App.css";
+import { withRouter } from "react-router-dom";
 import Routes from "./routes";
 
 function App() {
-  return (
-    <div className="App--container">
-      <Routes />
-    </div>
-  );
+  return <Routes />;
 }
 
-export default App;
+export default withRouter(App);
