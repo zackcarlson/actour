@@ -1,0 +1,18 @@
+ul.highlights-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+li.highlight-card {
+  display: flex;
+  flex-direction: column;
+}
+
+li.highlight-card p {
+  margin: 0.4rem 1rem;
+}

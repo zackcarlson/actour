@@ -1,0 +1,24 @@
+ul.credits-list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+li.credit-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #2a3d7bfc;
+  border-bottom: 1px solid #4c599e;
+  max-width: 700px;
+  width: 100%;
+}
+
+li.credit-card .movie-title {
+  margin: 0.5rem 0;
+}
