@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { withApollo } from "react-apollo";
 import { GET_AWARDS } from "../../queries";
 import { handleCache } from "../../utils";
+import SkeletonHighlights from "../skeletons/highlights";
 import "./index.css";
 
 const Highlights = (props) => {
@@ -12,21 +13,25 @@ const Highlights = (props) => {
 
   useEffect(() => {
     const { client } = props;
-    handleCache(
-      client,
-      `${name}-${imdb}-awards`,
-      setAwards,
-      setIsLoading,
-      GET_AWARDS,
-      { id: imdb },
-      "getAwards"
-    );
+    const timer = setTimeout(() => {
+      handleCache(
+        client,
+        `${name}-${imdb}-awards`,
+        setAwards,
+        setIsLoading,
+        GET_AWARDS,
+        { id: imdb },
+        "getAwards"
+      );
+    }, 800);
+    // Cancel the timer while unmounting
+    return () => clearTimeout(timer);
   }, [name, props, imdb]);
 
   return (
     <div className="Actor--highlights">
       {isLoading && !awards ? (
-        "Loading..."
+        <SkeletonHighlights />
       ) : (
         <>
           {awards.otherWinsCount && (

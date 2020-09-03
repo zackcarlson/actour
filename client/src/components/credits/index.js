@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { withApollo } from "react-apollo";
 import { GET_CREDITS } from "../../queries";
 import { handleCache } from "../../utils";
+import SkeletonCredits from "../skeletons/credits";
 import "./index.css";
 const Credit = lazy(() =>
   import(
@@ -18,15 +19,19 @@ const Credits = (props) => {
 
   useEffect(() => {
     const { client } = props;
-    handleCache(
-      client,
-      `${name}-${imdb}-credits`,
-      setCredits,
-      setIsLoading,
-      GET_CREDITS,
-      { id: imdb },
-      "getCredits"
-    );
+    const timer = setTimeout(() => {
+      handleCache(
+        client,
+        `${name}-${imdb}-credits`,
+        setCredits,
+        setIsLoading,
+        GET_CREDITS,
+        { id: imdb },
+        "getCredits"
+      );
+    }, 800);
+
+    return () => clearTimeout(timer);
   }, [name, props, imdb]);
 
   return (
@@ -34,20 +39,22 @@ const Credits = (props) => {
       <div className="Actor--creditsContainer">
         <h2>Credits</h2>
         <div className="Actor--credits">
-          {isLoading && !credits
-            ? "Loading..."
-            : credits.map(({ title, roles, year, status }, i) => {
-                return (
-                  <Credit
-                    title={title}
-                    roles={roles}
-                    year={year}
-                    status={status}
-                    i={i}
-                    key={title + i}
-                  />
-                );
-              })}
+          {isLoading && !credits ? (
+            <SkeletonCredits />
+          ) : (
+            credits.map(({ title, roles, year, status }, i) => {
+              return (
+                <Credit
+                  title={title}
+                  roles={roles}
+                  year={year}
+                  status={status}
+                  i={i}
+                  key={title + i}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </Suspense>
