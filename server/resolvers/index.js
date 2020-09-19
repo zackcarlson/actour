@@ -3,6 +3,7 @@ const {
   addActorIMDBID,
   getActorCredits,
   getActorAwards,
+  getCreditMetadata
 } = require("../utils");
 
 const actorResolvers = {
@@ -22,6 +23,10 @@ const actorResolvers = {
       let awards = await getActorAwards(id);
       return awards;
     },
+    getMetadata: async (_, { ids }, __, info) => {
+      let creditMetadata = await getCreditMetadata(ids);
+      return creditMetadata
+    }
   },
 };
 

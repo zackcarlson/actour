@@ -3,6 +3,12 @@ const actorTypes = `
     getActor(query: String!): Actor
     getCredits(id: String!): [Credit]
     getAwards(id: String!): Awards
+    getMetadata(ids: String!): [Metadata]
+  }
+
+  type Metadata {
+    genres: [String]
+    certificate: String
   }
 
   type Awards {
@@ -20,6 +26,7 @@ const actorTypes = `
     roles: [Role]
     year: Int
     status: String
+    id: String
   }
 
   type Movie {
