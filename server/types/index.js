@@ -3,7 +3,7 @@ const actorTypes = `
     getActor(query: String!): Actor
     getCredits(id: String!): [Credit]
     getAwards(id: String!): Awards
-    getMetadata(ids: String!): [Metadata]
+    getMetadata(ids: [String!]): [Metadata]
   }
 
   type Metadata {

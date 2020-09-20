@@ -45,11 +45,11 @@ const getActorCredits = async (id) => {
 
   const getCredit = (credit) => {
     if (credit.category === "actor" || credit.category === "actress") {
-      credit.id = credit.id.split('/')[2];
+      credit.id = credit.id.split("/")[2];
       return credit;
     }
     return null;
-  }
+  };
 
   const credits = result.data.filmography.filter(getCredit);
 
@@ -84,54 +84,51 @@ const getActorAwards = async (id) => {
   return awards;
 };
 
-const getCreditMetadata = async (id) => { 
-  const result = await axios({
-    method: "GET",
-    url: "https://imdb8.p.rapidapi.com/title/get-meta-data",
-    headers: {
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
-      "x-rapidapi-key": process.env.IMDB_API_KEY,
-      useQueryString: true,
-    },
-    params: {
-      ids: id,
-    },
-  });
+const createTitleQuery = (credits) => {
+  const ids = credits.reduce((accum, id, i) => {
+    if (i !== credits.length - 1) accum += `${id}&ids=`;
+    else accum += id;
+    return accum;
+  }, "");
+  return ids;
+};
 
-  const { data } = result;
-  return Object.values(data);
-}
+const getCreditMetadata = async (ids) => {
+  try {
+    let Promises = [];
 
-/*
-TODO:
+    for (let i = 0; i < ids.length; i += 50) {
+      let fiftyCredits = ids.slice(i, i + 50);
+      let queryString = createTitleQuery(fiftyCredits);
 
-------------
-Client
--Create a Credits context provider:
-  instantiate to:
-    a) cached [actor name]-[imdb id]-credits
-    b) empty array
+      let result = await axios({
+        method: "GET",
+        url: "https://imdb8.p.rapidapi.com/title/get-meta-data",
+        headers: {
+          "x-rapidapi-host": "imdb8.p.rapidapi.com",
+          "x-rapidapi-key": process.env.IMDB_API_KEY,
+          useQueryString: true,
+        },
+        params: {
+          ids: queryString,
+        },
+      });
 
--When getCredits finishes, store result in Credits context
+      const { data } = result;
+      Promises = Promises.concat(Object.values(data));
+    }
 
--Metadata page will check if Credits context is full:
-  if full:
-    a) loop through Credits array to get title id in multiples of 50 (while loop until array length - 1)
-    b) (cb function) store each id into a temp array and concat to '&ids='
-    c) store callback func in Promises array
-    d) when finished looping, resolve Promises
-    e) cache results 
-    f) load metadata objects into Chart.js
-
-  else show skeleton 
-------------
-
-*/ 
+    const metadata = await Promise.all(Promises);
+    return metadata;
+  } catch (err) {
+    console.log("Error batching metadata requests", err);
+  }
+};
 
 module.exports = {
   getActor,
   addActorIMDBID,
   getActorCredits,
   getActorAwards,
-  getCreditMetadata
+  getCreditMetadata,
 };
