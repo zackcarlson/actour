@@ -1,10 +1,13 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useContext, useEffect, useState, lazy, Suspense } from "react";
 import { useParams } from "react-router";
 import { withApollo } from "react-apollo";
 import { GET_CREDITS } from "../../queries";
 import { handleCache } from "../../utils";
 import SkeletonCredits from "../skeletons/credits";
 import "./index.css";
+import { CreditsContext } from "../../state/context";
+import { updateCredits } from "../../state/actions/credits";
+
 const Credit = lazy(() =>
   import(
     /* webpackPreload: true */
@@ -13,6 +16,7 @@ const Credit = lazy(() =>
 );
 
 const Credits = (props) => {
+  const [store, dispatch] = useContext(CreditsContext);
   const { name, imdb } = useParams();
   const [credits, setCredits] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +31,9 @@ const Credits = (props) => {
         setIsLoading,
         GET_CREDITS,
         { id: imdb },
-        "getCredits"
+        "getCredits",
+        updateCredits,
+        dispatch
       );
     }, 800);
 
