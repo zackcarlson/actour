@@ -19,6 +19,7 @@ export const GET_ACTOR = gql`
 export const GET_CREDITS = gql`
   query Credits($id: String!) {
     getCredits(id: $id) {
+      id
       title
       roles {
         character
@@ -35,6 +36,15 @@ export const GET_AWARDS = gql`
     getAwards(id: $id) {
       otherWinsCount
       awardName
+    }
+  }
+`;
+
+export const GET_METADATA = gql`
+  query Metadata($ids: [String!]) {
+    getMetadata(ids: $ids) {
+      genres
+      certificate
     }
   }
 `;
