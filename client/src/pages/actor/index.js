@@ -3,7 +3,11 @@ import { withRouter, useParams } from "react-router";
 import { withApollo } from "react-apollo";
 import { GET_ACTOR } from "../../queries";
 import { handleCache } from "../../utils";
+import Store from "../../state/store.js";
+import Metadata from "../../components/metadata";
+
 import "./index.css";
+
 const Credits = lazy(() =>
   import(
     /* webpackPreload: true */
@@ -43,17 +47,20 @@ const Actor = (props) => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <div className="Actor--container">
-        {isLoading && !actorInfo ? (
-          "Loading..."
-        ) : (
-          <>
-            <Stats actorInfo={actorInfo} />
-            <Works actorInfo={actorInfo} />
-          </>
-        )}
-        <Credits />
-      </div>
+      <Store>
+        <div className="Actor--container">
+          {isLoading && !actorInfo ? (
+            "Loading..."
+          ) : (
+            <>
+              <Stats actorInfo={actorInfo} />
+              <Works actorInfo={actorInfo} />
+              <Metadata />
+            </>
+          )}
+          <Credits />
+        </div>
+      </Store>
     </Suspense>
   );
 };
